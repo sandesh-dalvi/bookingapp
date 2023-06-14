@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import "./Login.css";
+import "./login.scss";
 import { AuthContext } from "../../context/AuthContext";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
@@ -26,10 +26,18 @@ const Login = () => {
         "http://127.0.0.1:5000/api/auth/login",
         credentials
       );
-      dispatch({ type: "LOGIN_SUCCESS", payload: res.data.details });
-      navigate("/");
+      if (res.data.isAdmin) {
+        dispatch({ type: "LOGIN_SUCCESS", payload: res.data.details });
+
+        navigate("/");
+      } else {
+        dispatch({
+          type: "LOGIN_FAILURE",
+          payload: { message: "You are not authorized" },
+        });
+      }
     } catch (error) {
-      dispatch({ type: "LOGIN_FAILURE", payload: error.response.data });
+      dispatch({ type: "LOGIN_FAILURE", payload: error.response?.data });
     }
   };
 
