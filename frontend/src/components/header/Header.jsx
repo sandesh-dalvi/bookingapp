@@ -34,9 +34,8 @@ const Header = ({ type }) => {
     room: 1,
   });
 
-  const { user } = useContext(AuthContext);
-
   const navigate = useNavigate();
+  const { user } = useContext(AuthContext);
 
   const handleOption = (name, operation) => {
     setOptions((prev) => {

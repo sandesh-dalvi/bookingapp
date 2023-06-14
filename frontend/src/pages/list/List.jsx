@@ -109,7 +109,7 @@ const List = () => {
           </div>
           <div className="listResult">
             {loading ? (
-              "Loading"
+              "loading"
             ) : (
               <>
                 {data.map((item) => (
